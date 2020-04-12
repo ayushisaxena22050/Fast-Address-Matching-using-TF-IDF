@@ -8,24 +8,12 @@ from multiprocessing import Pool
 start_time = time.time()
 if __name__ == '__main__':
     dt = {
-        "COD_CUST_ID": str,
-        "Last_name": str,
         "NAM_CUST_SHRT": str,
         'ADD_tot': str,
         "TXT_CUSTADR_ZIP": str,
-        "REF_PHONE_MOBILE": str,
-        "NOMINEE_PHONE_NUMBER": str,
-        "LOAN_ID": str,
-        "NAM_CUSTADR_CITY": str,
-        "NAM_CUSTADR_STATE": str,
-        "COD_CC_BRN": str,
-        "COD_ACCT_NO": str
     }
     print("Started")
-    data01 = pd.read_csv(r"D:\Delhi_Groups\final_data\NODUP_CLEAN_DATA.csv", skiprows=0,dtype=dt)
-    data01.drop_duplicates(subset="COD_CUST_ID",inplace=True)
-    columns=["COD_CUST_ID","Last_name","NAM_CUST_SHRT",'ADD_tot',"TXT_CUSTADR_ZIP","REF_PHONE_MOBILE","NOMINEE_PHONE_NUMBER","LOAN_ID","NAM_CUSTADR_CITY","NAM_CUSTADR_STATE","COD_CC_BRN","COD_ACCT_NO"]
-    data01.columns=columns
+    data01 = pd.read_csv(r"data.csv", skiprows=0,dtype=dt)
     data01.dropna(subset=['TXT_CUSTADR_ZIP'], inplace=True)
     data01=data01[data01["TXT_CUSTADR_ZIP"].str.isdigit()]
     data01['TXT_CUSTADR_ZIP'] = pd.to_numeric(data01['TXT_CUSTADR_ZIP'], errors='coerce').dropna()
